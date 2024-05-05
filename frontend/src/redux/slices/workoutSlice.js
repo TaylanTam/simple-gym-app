@@ -5,6 +5,7 @@ import {queryClient} from "../../api/instances/queryClient";
 const initialState = {
     workoutStarted: false,
     exercises: [],
+    // timer: []
 }
 
 const initialExerciseDetails = {
@@ -44,6 +45,22 @@ export const workoutSlice = createSlice({
             const {exerciseIndex, index} = action.payload;
             state.exercises[exerciseIndex]["workout_exercise_details"].splice(index, 1);
         },
+        // setTimerStatus: (state, action) => {
+        //     const {exerciseIndex, value} = action.payload;
+        //     state.timer[exerciseIndex].status = value;
+        // },
+        // setTimeValue: (state, action) => {
+        //     const {exerciseIndex, value} = action.payload;
+        //     state.timer[exerciseIndex].time = value;
+        // },
+        // getTimerStatus: (state, action) => {
+        //     const {exerciseIndex, value} = action.payload;
+        //     if(state.timer[exerciseIndex]?.status === undefined) {
+        //         state.timer[exerciseIndex].status = false;
+        //     }
+        //
+        //     return state.timer[exerciseIndex]?.status;
+        // }
     },
 })
 

@@ -8,12 +8,14 @@ import ListWorkoutExercises from "./ListWorkoutExercises";
 import {timestampToString} from "../../../utils/helpers";
 import {clearWorkout} from "../../../redux/slices/workoutSlice";
 import * as api from "../../../api/workoutApi";
+import CountdownTimer from "./CountdownTimer";
 
 
 const NewWorkout = () => {
     const [showExerciseModal, setShowExerciseModal] = useState(false);
     const exercises = useSelector((state) => state.workout.exercises);
     const dispatch = useDispatch();
+    const [showTimer, setShowTimer] = useState(false);
 
     const createWorkoutMutation = useMutation(api.createWorkout, {
         onSuccess: () => {
@@ -42,6 +44,21 @@ const NewWorkout = () => {
             </div>
 
             <ListWorkoutExercises/>
+
+            {
+                showTimer ?
+                    <div>
+                        <CountdownTimer/>
+                        <div style={{display: 'flex', justifyContent: 'center'}}>
+                            <Button variant="danger" onClick={() => setShowTimer(false)}>Timer Off</Button>
+                        </div>
+                    </div>
+                    :
+                    <div style={{display: 'flex', justifyContent: 'center'}}>
+                        <Button variant="success" onClick={() => setShowTimer(true)}>Timer On</Button>
+                    </div>
+            }
+
 
             <div className="d-grid gap-2 mt-4">
                 <Button variant="primary" onClick={() => setShowExerciseModal(true)}>Add Exercises</Button>

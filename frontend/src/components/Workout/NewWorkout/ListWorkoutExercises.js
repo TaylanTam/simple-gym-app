@@ -4,12 +4,22 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import AddWorkoutExerciseDetails from "./AddWorkoutExerciseDetails";
-import {deleteExercise} from "../../../redux/slices/workoutSlice";
+import {addExerciseDetails, deleteExercise} from "../../../redux/slices/workoutSlice";
 
 
 const ListWorkoutExercises = () => {
     const exercises = useSelector((state) => state.workout.exercises);
+    // const timer = useSelector((state) => state.workout.timer)
     const dispatch = useDispatch();
+    //
+    // const updateTimerState = (exerciseIndex) => {
+    //
+    // }
+    //
+    // const getTimerStatus = (exerciseIndex) => {
+    //     const timerState = timer[exerciseIndex]?.status ?? false
+    //     return timerState ? "Timer Off" : "Timer On"
+    // }
 
     return (
         <div className="list-workout-exercises-scroll-container">
@@ -21,6 +31,16 @@ const ListWorkoutExercises = () => {
                             <Col>
                                 <h5>{exercise.name} ({exercise.equipment})</h5>
                             </Col>
+                            {/*<Col>*/}
+                            {/*    <Button*/}
+                            {/*        className="align-content-start"*/}
+                            {/*        variant="success"*/}
+                            {/*        size="sm"*/}
+                            {/*        // onClick={() => dispatch(addExerciseDetails(exerciseIndex))}*/}
+                            {/*    >*/}
+                            {/*        {timerButtonText}*/}
+                            {/*    </Button>*/}
+                            {/*</Col>*/}
                             <Col>
                                 <Button
                                     className="float-end"
