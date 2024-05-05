@@ -5,21 +5,28 @@ import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import AddWorkoutExerciseDetails from "./AddWorkoutExerciseDetails";
 import {addExerciseDetails, deleteExercise} from "../../../redux/slices/workoutSlice";
+import ExerciseVideo from "./ExerciseVideo";
+import {useEffect, useState} from "react";
 
 
 const ListWorkoutExercises = () => {
     const exercises = useSelector((state) => state.workout.exercises);
-    // const timer = useSelector((state) => state.workout.timer)
+    const [displayVideos, setDisplayVideos] = useState({});
     const dispatch = useDispatch();
-    //
-    // const updateTimerState = (exerciseIndex) => {
-    //
-    // }
-    //
-    // const getTimerStatus = (exerciseIndex) => {
-    //     const timerState = timer[exerciseIndex]?.status ?? false
-    //     return timerState ? "Timer Off" : "Timer On"
-    // }
+
+    useEffect(() => {
+        document.cookie = "myCookie=myValue; SameSite=None; Secure";
+    }, []);
+
+    const toggleDisplayVideo = (index) => {
+        setDisplayVideos(prevState => ({
+            ...prevState,
+            [index]: !prevState[index]
+        }));
+    };
+
+    const isVideoDisplayed = (index) => displayVideos[index];
+
 
     return (
         <div className="list-workout-exercises-scroll-container">
@@ -31,16 +38,27 @@ const ListWorkoutExercises = () => {
                             <Col>
                                 <h5>{exercise.name} ({exercise.equipment})</h5>
                             </Col>
-                            {/*<Col>*/}
-                            {/*    <Button*/}
-                            {/*        className="align-content-start"*/}
-                            {/*        variant="success"*/}
-                            {/*        size="sm"*/}
-                            {/*        // onClick={() => dispatch(addExerciseDetails(exerciseIndex))}*/}
-                            {/*    >*/}
-                            {/*        {timerButtonText}*/}
-                            {/*    </Button>*/}
-                            {/*</Col>*/}
+                            <Col>
+                                {isVideoDisplayed(index) ? (
+                                    <Button
+                                        className="float-start"
+                                        variant="warning"
+                                        size="sm"
+                                        onClick={() => toggleDisplayVideo(index)}
+                                    >
+                                        Close Related Video
+                                    </Button>
+                                ) : (
+                                    <Button
+                                        className="float-start"
+                                        variant="info"
+                                        size="sm"
+                                        onClick={() => toggleDisplayVideo(index)}
+                                    >
+                                        Show Related Video
+                                    </Button>
+                                )}
+                            </Col>
                             <Col>
                                 <Button
                                     className="float-end"
@@ -52,6 +70,10 @@ const ListWorkoutExercises = () => {
                                 </Button>
                             </Col>
                         </Row>
+                        {
+                            isVideoDisplayed(index) &&
+                            <ExerciseVideo exerciseName={exercise.name}/>
+                        }
                         <AddWorkoutExerciseDetails exercise={exercise} exerciseIndex={index}/>
                     </ListGroup.Item>
                 )}
