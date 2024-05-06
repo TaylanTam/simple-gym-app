@@ -17,4 +17,5 @@ export const pageRoutes = {
     workout: '/workout',
     history: '/history',
     exercises: '/exercises',
+    tools: '/tools'
 };

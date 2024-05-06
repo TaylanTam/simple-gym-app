@@ -16,6 +16,7 @@ import {updateWeightUnit} from "./redux/slices/authSlice";
 import {pageRoutes} from "./utils/routes";
 import * as exerciseApi from "./api/exerciseApi";
 import * as profileApi from "./api/profileApi";
+import Tools from "./components/Tools";
 
 
 const App = () => {
@@ -38,6 +39,7 @@ const App = () => {
                         <Route index path={pageRoutes.login} element={<Login/>}/>
                         <Route path={pageRoutes.register} element={<Register/>}/>
                         <Route path={pageRoutes.profile} element={<ProtectedRoute><Profile/></ProtectedRoute>}/>
+                        <Route path={pageRoutes.tools} element={<ProtectedRoute><Tools/></ProtectedRoute>}/>
                         <Route path={pageRoutes.workout} element={<ProtectedRoute><Workout/></ProtectedRoute>}/>
                         <Route path={pageRoutes.history} element={<ProtectedRoute><WorkoutHistory/></ProtectedRoute>}/>
                         <Route path={pageRoutes.exercises} element={<ProtectedRoute><Exercises/></ProtectedRoute>}/>

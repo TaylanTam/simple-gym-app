@@ -32,6 +32,12 @@ const NavigationBar = () => {
                 </Nav.Item>
 
                 <Nav.Item>
+                    <Nav.Link as={Link} to={pageRoutes.tools} eventKey={pageRoutes.tools}>
+                        Tools
+                    </Nav.Link>
+                </Nav.Item>
+
+                <Nav.Item>
                     <Nav.Link as={Link} to={pageRoutes.workout} eventKey={pageRoutes.workout}>
                         Workout
                     </Nav.Link>
