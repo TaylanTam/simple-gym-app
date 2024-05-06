@@ -50,12 +50,12 @@ const NewWorkout = () => {
                     <div>
                         <CountdownTimer/>
                         <div style={{display: 'flex', justifyContent: 'center'}}>
-                            <Button variant="danger" onClick={() => setShowTimer(false)}>Timer Off</Button>
+                            <Button variant="outline-danger" onClick={() => setShowTimer(false)}>Timer Off</Button>
                         </div>
                     </div>
                     :
                     <div style={{display: 'flex', justifyContent: 'center'}}>
-                        <Button variant="success" onClick={() => setShowTimer(true)}>Timer On</Button>
+                        <Button variant="outline-success" onClick={() => setShowTimer(true)}>Timer On</Button>
                     </div>
             }
 
