@@ -1,6 +1,6 @@
-import React, {useEffect, useState} from 'react';
-import {useTimer} from 'react-timer-hook';
-import {Button} from 'react-bootstrap';
+import React, { useEffect, useState } from 'react';
+import { useTimer } from 'react-timer-hook';
+import { Button } from 'react-bootstrap';
 import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import Modal from "react-bootstrap/Modal";
@@ -112,7 +112,7 @@ function CountdownTimer() {
                 <div style={{ flex: 1, textAlign: 'center' }}>
                     <div style={{ padding: '18px' }}>Timer:</div>
                     <div style={{ fontSize: '50px' }}>
-                        <span>{minutes}</span>:<span>{seconds}</span>
+                        <span>{minutes < 10 ? '0' : ''}{minutes}</span>:<span>{seconds < 10 ? '0' : ''}{seconds}</span>
                     </div>
                 </div>
             </div>

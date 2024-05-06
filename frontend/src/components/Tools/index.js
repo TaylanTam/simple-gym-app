@@ -1,62 +1,53 @@
-import Button from "react-bootstrap/Button";
+import React from 'react';
+import { Container, Row, Col, Card } from 'react-bootstrap';
 import CountdownTimer from "../Workout/NewWorkout/CountdownTimer";
-import {useState} from "react";
-
-// spotify playlist?
+import CalorieCalculator from "./CalorieCalculator";
 
 const Tools = () => {
-    const [showTimer, setShowTimer] = useState(false);
-
+    const spotifyPlaylistLink = 'https://open.spotify.com/embed/playlist/37i9dQZF1DX76Wlfdnj7AP?utm_source=generator';
     return (
-        <div className="mt-2">
-            <h2 className="text-center">Tools</h2>
-            {
-                showTimer ?
-                    <div>
-                        <div style={{display: 'flex', justifyContent: 'center'}}>
-                            <Button variant="danger" onClick={() => setShowTimer(false)}>Timer Off</Button>
-                        </div>
-                        <CountdownTimer/>
-                    </div>
-                    :
-                    <div style={{display: 'flex', justifyContent: 'center'}}>
-                        <Button variant="success" onClick={() => setShowTimer(true)}>Timer On</Button>
-                    </div>
-            }
-            {/*<div className="mt-3"><strong>Email: </strong>{profileData?.["email"]}</div>*/}
-            {/*<div className="mt-3"><strong>Username: </strong>{profileData?.["username"]}</div>*/}
-            {/*<div className="mt-3">*/}
-            {/*    <strong>Weight unit:</strong>*/}
-            {/*    <ToggleButtonGroup*/}
-            {/*        name="metric-system"*/}
-            {/*        type="radio"*/}
-            {/*        value={weightUnit}*/}
-            {/*        size="sm"*/}
-            {/*        className="mx-1"*/}
-            {/*        onChange={handleWeightUnitChange}*/}
-            {/*    >*/}
-            {/*        <ToggleButton*/}
-            {/*            id="btn-kg"*/}
-            {/*            variant={weightUnit === "kg" ? "primary" : "secondary"}*/}
-            {/*            value="kg"*/}
-            {/*        >*/}
-            {/*            Metric (kg)*/}
-            {/*        </ToggleButton>*/}
-            {/*        <ToggleButton*/}
-            {/*            id="btn-lbs"*/}
-            {/*            variant={weightUnit === "lbs" ? "primary" : "secondary"}*/}
-            {/*            value="lbs"*/}
-            {/*        >*/}
-            {/*            Imperial (lbs)*/}
-            {/*        </ToggleButton>*/}
-            {/*    </ToggleButtonGroup>*/}
-            {/*</div>*/}
-            {/*<div className="mt-2"><strong>Account created: </strong>{timestampToString(profileData?.["created"])}</div>*/}
-
-            {/*<div className="mt-3 text-center">*/}
-            {/*    <Button variant="danger" size="lg" onClick={() => logoutMutation.mutate()}>Log out</Button>*/}
-            {/*</div>*/}
-        </div>
+        <Container className="mt-4">
+            <h2 className="text-center mb-4">Tools</h2>
+            <Row className="justify-content-center">
+                <Col lg={6} className="mb-4">
+                    <Row>
+                        <Col lg={12}>
+                            <Card>
+                                <Card.Body>
+                                    <Card.Title className="text-center">Countdown Timer</Card.Title>
+                                    <CountdownTimer />
+                                </Card.Body>
+                            </Card>
+                        </Col>
+                        <Col lg={12} className="mt-4">
+                            <Card>
+                                <Card.Body>
+                                    <Card.Title className="text-center">Spotify Playlist</Card.Title>
+                                    <iframe
+                                        className="w-100"
+                                        style={{ borderRadius: '12px' }}
+                                        src={spotifyPlaylistLink}
+                                        width="100%"
+                                        height="352"
+                                        allowFullScreen=""
+                                        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                                        loading="lazy"
+                                    ></iframe>
+                                </Card.Body>
+                            </Card>
+                        </Col>
+                    </Row>
+                </Col>
+                <Col lg={6}>
+                    <Card className="mb-4">
+                        <Card.Body>
+                            <Card.Title className="text-center">Calorie Calculator</Card.Title>
+                            <CalorieCalculator />
+                        </Card.Body>
+                    </Card>
+                </Col>
+            </Row>
+        </Container>
     );
 };
 

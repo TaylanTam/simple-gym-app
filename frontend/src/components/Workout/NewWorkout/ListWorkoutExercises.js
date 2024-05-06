@@ -4,9 +4,9 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Button from "react-bootstrap/Button";
 import AddWorkoutExerciseDetails from "./AddWorkoutExerciseDetails";
-import {addExerciseDetails, deleteExercise} from "../../../redux/slices/workoutSlice";
+import {deleteExercise} from "../../../redux/slices/workoutSlice";
 import ExerciseVideo from "./ExerciseVideo";
-import React, {useEffect, useState} from "react";
+import React, {useState} from "react";
 import Modal from "react-bootstrap/Modal";
 import {useQuery} from "react-query";
 import * as api from "../../../api/workoutApi";
@@ -58,54 +58,50 @@ const ListWorkoutExercises = () => {
             <ListGroup variant="flush" className="scroll">
                 {exercises?.map((exercise, index) =>
                     <ListGroup.Item key={index}>
-                        <Row>
+                        <Row className="align-items-center">
                             <Col>
                                 <h5>{exercise.name} ({exercise.equipment})</h5>
                             </Col>
                             <Col>
-                                <Button
-                                    className="float-end"
-                                    variant="danger"
-                                    size="sm"
-                                    style={{marginLeft: "10px"}}
-                                    onClick={() => dispatch(deleteExercise(index))}
-                                >
-                                    Delete Exercise
-                                </Button>
-
-                                {
-                                    isVideoDisplayed(index) ?
-                                        <Button
-                                            className="float-end"
-                                            variant="warning"
-                                            size="sm"
-                                            style={{marginLeft: "10px"}}
-                                            onClick={() => toggleDisplayVideo(index)}
-                                        >
-                                            Close Related Video
-                                        </Button>
-                                        :
-                                        <Button
-                                            className="float-end"
-                                            variant="info"
-                                            size="sm"
-                                            style={{marginLeft: "10px"}}
-                                            onClick={() => toggleDisplayVideo(index)}
-                                        >
-                                            Show Related Video
-                                        </Button>
-                                }
-
-                                <Button
-                                    className="float-end"
-                                    variant="primary"
-                                    size="sm"
-                                    style={{marginLeft: "10px"}}
-                                    onClick={() => processData(exercise.name)}
-                                >
-                                    Exercise History
-                                </Button>
-
+                                <div className="d-flex justify-content-end align-items-center">
+                                    <Button
+                                        variant="danger"
+                                        size="sm"
+                                        className="mx-2"
+                                        onClick={() => dispatch(deleteExercise(index))}
+                                    >
+                                        Delete Exercise
+                                    </Button>
+                                    {
+                                        isVideoDisplayed(index) ? (
+                                            <Button
+                                                variant="warning text-white"
+                                                size="sm"
+                                                className="mx-2"
+                                                onClick={() => toggleDisplayVideo(index)}
+                                            >
+                                                Close Related Video
+                                            </Button>
+                                        ) : (
+                                            <Button
+                                                variant="warning text-white"
+                                                size="sm"
+                                                className="mx-2"
+                                                onClick={() => toggleDisplayVideo(index)}
+                                            >
+                                                Show Related Video
+                                            </Button>
+                                        )
+                                    }
+                                    <Button
+                                        variant="primary"
+                                        size="sm"
+                                        className="mx-2"
+                                        onClick={() => processData(exercise.name)}
+                                    >
+                                        Exercise History
+                                    </Button>
+                                </div>
                             </Col>
                         </Row>
                         {
