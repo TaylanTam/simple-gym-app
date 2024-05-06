@@ -14,10 +14,6 @@ const ListWorkoutExercises = () => {
     const [displayVideos, setDisplayVideos] = useState({});
     const dispatch = useDispatch();
 
-    useEffect(() => {
-        document.cookie = "myCookie=myValue; SameSite=None; Secure";
-    }, []);
-
     const toggleDisplayVideo = (index) => {
         setDisplayVideos(prevState => ({
             ...prevState,

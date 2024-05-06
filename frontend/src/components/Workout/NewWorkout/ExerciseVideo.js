@@ -3,14 +3,15 @@ import Iframe from 'react-iframe';
 
 function ExerciseVideo({exerciseName: exerciseName}) {
     const [videoId, setVideoId] = useState('');
+    const apiKey = 'AIzaSyDNe0qKe4oGLwrDSzixVX_l0ECz3zErLgk';
+
 
     useEffect(() => {
-        document.cookie = "myCookie=myValue; SameSite=None; Secure";
+        document.cookie = 'SameSite=none; Secure=true';
     }, []);
 
     useEffect(() => {
-        console.log('exerciseName:', exerciseName)
-        try{
+        try {
             if (exerciseName !== undefined) {
                 fetchVideoData();
             }
@@ -19,30 +20,30 @@ function ExerciseVideo({exerciseName: exerciseName}) {
         }
     }, [exerciseName]);
 
-const fetchVideoData = async () => {
-    try {
-        const response = await fetch(
-            `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${encodeURIComponent(
-                exerciseName
-            )}&maxResults=1&key=AIzaSyDNe0qKe4oGLwrDSzixVX_l0ECz3zErLgk`
-        );
-        if (!response.ok) {
-            console.log('Failed to fetch video data');
-        }
-        const data = await response.json();
-        const firstVideoId = data.items[0]?.id?.videoId;
+    const fetchVideoData = async () => {
+        try {
+            const response = await fetch(
+                `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${encodeURIComponent(
+                    exerciseName
+                )}&maxResults=1&key=${apiKey}`
+            );
+            if (!response.ok) {
+                console.log('Failed to fetch video data');
+            }
+            const data = await response.json();
+            const firstVideoId = data.items[0]?.id?.videoId;
 
-        if (firstVideoId) {
-            setVideoId(firstVideoId);
+            if (firstVideoId) {
+                setVideoId(firstVideoId);
+            }
+        } catch (error) {
+            console.error('Error fetching video data:', error);
         }
-    } catch (error) {
-        console.error('Error fetching video data:', error);
-    }
-};
+    };
 
 
     return (
-        <div style={{ padding: '10px', display: 'flex', justifyContent: 'center' }}>
+        <div style={{padding: '10px', display: 'flex', justifyContent: 'center'}}>
             {videoId ? (
                 <iframe
                     sandbox="allow-storage-access-by-user-activation allow-scripts allow-same-origin allow-presentation"
